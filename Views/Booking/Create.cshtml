@@ -1,0 +1,57 @@
+﻿@model EventEase.Models.Booking
+
+@{
+    ViewData["Title"] = "Create Booking";
+}
+
+<h1>Create Booking</h1>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewData.ModelState.Any(m => m.Key == ""))
+            {
+                <div class="text-danger">
+                    @foreach (var error in ViewData.ModelState[""].Errors)
+                    {
+                        <p>@error.ErrorMessage</p>
+                    }
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="VenueId" class="control-label"></label>
+                <select asp-for="VenueId" class="form-control" asp-items="ViewBag.VenueId" required>
+                    <option value="">Select a Venue</option>
+                </select>
+                <span asp-validation-for="VenueId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventId" class="control-label"></label>
+                <select asp-for="EventId" class="form-control" asp-items="ViewBag.EventId" required>
+                    <option value="">Select an Event</option>
+                </select>
+                <span asp-validation-for="EventId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingDate" class="control-label"></label>
+                <input asp-for="BookingDate" class="form-control" type="date" required />
+                <span asp-validation-for="BookingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
